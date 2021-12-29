@@ -1,17 +1,26 @@
 import json
 
+class songs_data:
+    @staticmethod
+    def get_data():
+        jsonFile = open("/app/data.json", "r")
+        data = json.load(jsonFile)
+        return data
+
 class songs_backend:
     def __init__(self):
         pass
 
     @staticmethod
-    def songs_page(page, limit, ds):
+    def songs_page(page, limit):
+        ds = songs_data().get_data()
         page = page - 1
         paginated = [ds[i:i+limit] for i in range(0, len(ds), limit)]
         return paginated[page]
 
     @staticmethod
-    def songs_level(level, ds):
+    def songs_level(level):
+        ds = songs_data().get_data()
         level = int(level)
         songs = []
         for song in ds:
@@ -22,7 +31,8 @@ class songs_backend:
         return songs
 
     @staticmethod
-    def songs_search(query, ds):
+    def songs_search(query):
+        ds = songs_data().get_data()
         songs = []
         for song in ds:
             if song['artist'] == query:
@@ -55,8 +65,7 @@ class songs_backend:
     def songs_finder(song_id, param):
         song_id = int(song_id)
         songs = []
-        jsonFile = open("/app/data.json", "r")
-        data = json.load(jsonFile)
+        data = songs_data().get_data()
         rating = []
         for song in data:
             if song['song_id'] == song_id:
