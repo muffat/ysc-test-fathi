@@ -1,0 +1,8 @@
+{% for song in activity %}
+    <div>{{ loop.index }}</div>
+    <div>{{ song.artist }}</div>
+    <div>{{ song.title }}</div>
+    <div>{{ song.difficulty }}</div>
+    <div>{{ song.level }}</div>
+    <div>{{ song.released }}</div>
+{% endfor %}
