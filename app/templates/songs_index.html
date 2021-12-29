@@ -1,8 +1,12 @@
+<h3>
+    To navigate the page: /songs/{page_number}, example: /songs/2
+</h3>
+
 {% for song in activity %}
-    <div>{{ loop.index }}</div>
-    <div>{{ song.artist }}</div>
-    <div>{{ song.title }}</div>
-    <div>{{ song.difficulty }}</div>
-    <div>{{ song.level }}</div>
-    <div>{{ song.released }}</div>
+    <div>artist: {{ song.artist }}</div>
+    <div>title: {{ song.title }}</div>
+    <div>difficulty: {{ song.difficulty }}</div>
+    <div>level: {{ song.level }}</div>
+    <div>released: {{ song.released }}</div>
+    <br>
 {% endfor %}

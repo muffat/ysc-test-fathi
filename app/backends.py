@@ -13,10 +13,13 @@ class songs_backend:
 
     @staticmethod
     def songs_page(page, limit):
-        ds = songs_data().get_data()
-        page = page - 1
-        paginated = [ds[i:i+limit] for i in range(0, len(ds), limit)]
-        return paginated[page]
+        try:
+            ds = songs_data().get_data()
+            page = page - 1
+            paginated = [ds[i:i+limit] for i in range(0, len(ds), limit)]
+            return paginated[page]
+        except IndexError:
+            return {}
 
     @staticmethod
     def songs_level(level):

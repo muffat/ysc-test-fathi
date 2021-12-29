@@ -1,12 +1,12 @@
-{% for song in activity %}
-    <div>{{ loop.index }}</div>
-    <div>{{ song.artist }}</div>
-    <div>{{ song.title }}</div>
-    <div>{{ song.difficulty }}</div>
-    <div>{{ song.level }}</div>
-    <div>{{ song.released }}</div>
-{% endfor %}
-
 <h3>
     Average difficulty : {{ songs_avg }}
 </h3>
+
+{% for song in activity %}
+    <div>artist: {{ song.artist }}</div>
+    <div>title: {{ song.title }}</div>
+    <div>difficulty: {{ song.difficulty }}</div>
+    <div>level: {{ song.level }}</div>
+    <div>released: {{ song.released }}</div>
+    <br>
+{% endfor %}
