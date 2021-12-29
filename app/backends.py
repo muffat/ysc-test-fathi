@@ -1,7 +1,9 @@
+import json
+
 class songs_backend:
     def __init__(self):
         pass
-        
+
     @staticmethod
     def songs_page(page, limit, ds):
         page = page - 1
@@ -30,20 +32,62 @@ class songs_backend:
         return songs
 
     @staticmethod
-    def give_songs_rating(song_id, rating, ds):
-        f = open("data.json", "r")
+    def give_songs_rating(song_id, rating):
+        rating = int(rating)
+        song_id = int(song_id)
+        if rating > 0 and rating < 6:
+            jsonFile = open("/app/data.json", "r")
+            data = json.load(jsonFile)
+            songs = []
+            for song in data:
+                if song['song_id'] == song_id:
+                    ratings = song['rating']
+                    ratings.append(rating)
+                songs.append(song)
+            jsonFile = open("/app/data.json", "w+")
+            jsonFile.write(json.dumps(songs))
+            jsonFile.close()
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def songs_finder(song_id, param):
+        song_id = int(song_id)
+        songs = []
+        jsonFile = open("/app/data.json", "r")
+        data = json.load(jsonFile)
+        rating = []
+        for song in data:
+            if song['song_id'] == song_id:
+                rating.append(song['rating'])
+        if param == "average":
+            if len(rating[0]) == 0:
+                result = 0
+            else:
+                result = sum(rating[0]) / len(rating[0])
+        if param == "highest":
+            if len(rating[0]) == 0:
+                result = 0
+            else:
+                result = max(rating[0])
+        if param == "lowest":
+            if len(rating[0]) == 0:
+                result = 0
+            else:
+                result = min(rating[0])
+        return result
+
+    @staticmethod
+    def song_details(song_id):
+        song_id = int(song_id)
+        jsonFile = open("/app/data.json", "r")
         data = json.load(jsonFile)
         songs = []
-        for song in ds:
+        for song in data:
             if song['song_id'] == song_id:
-                ratings = song['rating']
-                if rating > 0 and rating < 6:
-                    ratings.append(rating)
-            songs.append(song)
-        jsonFile = open("data.json", "w+")
-        jsonFile.write(json.dumps(data))
-        jsonFile.close()
-        return True
+                songs.append(song)
+        return songs
 
     @staticmethod
     def avg_difficulty(songs):

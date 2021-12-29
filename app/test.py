@@ -6,14 +6,18 @@ songs = []
 
 jsonFile = open("data.json", "r") # Open the JSON file for reading
 data = json.load(jsonFile) # Read the JSON into the buffer
-print(data)
 
+songs = []
 for i in data:
-    ratings = i['rating']
-    ratings.append(3)
-    ratings.append(1)
+    if i['song_id'] == 1:
+        song_rating = i['rating']
+        song_rating.append(2)
+        song_rating.append(3)
     songs.append(i)
+print(songs)
 
-jsonFile = open("data.json", "w+")
-jsonFile.write(json.dumps(data))
-jsonFile.close()
+
+
+#jsonFile = open("data.json", "w+")
+#jsonFile.write(json.dumps(data))
+#jsonFile.close()

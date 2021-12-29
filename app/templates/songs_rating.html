@@ -1,14 +1,15 @@
-<h3>
-    Songs rating : <b>{{ query }}</b>
-</h3>
-
----
-
 {% for song in activity %}
-    <div><b>{{ loop.index }}</b></div>
     <div>{{ song.artist }}</div>
     <div>{{ song.title }}</div>
     <div>{{ song.difficulty }}</div>
     <div>{{ song.level }}</div>
     <div>{{ song.released }}</div>
 {% endfor %}
+
+---
+
+<h3>
+    <div>Average rating : <b>{{ average_rating }}</b></div>
+    <div>Lowest rating : <b>{{ lowest_rating }}</b></div>
+    <div>Highest rating : <b>{{ highest_rating }}</b></div>
+</h3>
