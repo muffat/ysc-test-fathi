@@ -55,7 +55,7 @@ def songs_rating():
     if request.method == "POST":
         song_id = request.form['song_id']
         rating = request.form['rating']
-        songs_backend().songs_rating(song_id, rating)
+        songs_backend().give_songs_rating(song_id, rating)
 
     template = render_template("songs_rating.html")
     minified_template = html_minify(template)

@@ -30,15 +30,20 @@ class songs_backend:
         return songs
 
     @staticmethod
-    def songs_rating(song_id, rating, ds):
-        f = open("data.json",'w')
+    def give_songs_rating(song_id, rating, ds):
+        f = open("data.json", "r")
+        data = json.load(jsonFile)
         songs = []
         for song in ds:
             if song['song_id'] == song_id:
-                songs.append(song)
-        if rating > 0 and rating < 6:
-            pass
-        return songs
+                ratings = song['rating']
+                if rating > 0 and rating < 6:
+                    ratings.append(rating)
+            songs.append(song)
+        jsonFile = open("data.json", "w+")
+        jsonFile.write(json.dumps(data))
+        jsonFile.close()
+        return True
 
     @staticmethod
     def avg_difficulty(songs):
